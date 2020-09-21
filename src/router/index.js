@@ -7,6 +7,7 @@ import login from '../views/login.vue'
 import register from '../views/register.vue'
 import PageUsers from '../views/PageUsers.vue'
 import PageMasters from '../views/PageMasters.vue'
+import store from '../store/index.js'
 
 Vue.use(VueRouter)
 
@@ -14,12 +15,18 @@ Vue.use(VueRouter)
   {
     path: "/",
     name: "home",
-    component: home, 
+    component: home,
+    meta: {
+      requiresAuth: true
+    } 
   },
   {
     path: '/category',
     name: 'category',
-    component: category
+    component: category,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/login',
