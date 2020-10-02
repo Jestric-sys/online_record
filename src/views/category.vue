@@ -1,7 +1,7 @@
 <template>
   <div class="container" id="container">
     <header class="navbar" id="navbar">
-      <router-link class="navbar-logo" to="/">Workers</router-link>
+      <router-link class="navbar-logo" to="/category">Workers</router-link>
         <div class="navbar-menu">
             <ul class="menu-nav ">
             <li class="menu-list">
@@ -17,7 +17,9 @@
         <div class="list">
             <details v-for="item in category" class="category-list">
                 <summary class="btn btn-primary btn-lg" id="category-title"> {{ item.title }} </summary>
-                <a class="badge badge-primary submit-record" id="category-text">{{ item.jobs[i].title }}</a>
+                <div v-for="item in category" :id="item.id">
+                    <a class="badge badge-primary submit-record" id="category-text">{{ item.title }}</a>
+                </div>
             </details>
         </div>
         <div class="specialists">
@@ -68,20 +70,22 @@ export default {
                 .then(() => this.$router.push('/'))
                 .catch(err => console.log(err))
         },
-        details: function() {
-            let id = document.querySelector(".specialists-card").getAttribute("id");
-            console.log(id)
+        details: function(sender) {
+            let id = sender.path[0].id;
+            return fetch('/api/master/' + id)
+                .then(() => this.$router.push('/details/' + id))
         }
     },
     mounted() {
         this.getJSON(this.urlAPIcategory)
             .then(data => {
-                console.log(data[0])
-                this.category = data
+                this.category = data;
+                // for (let i = 0; i <= data.length; i++) {
+                //     console.log(data.jobs[i]);
+                // }
             })
         this.getJSON(this.urlAPImaster)
             .then(data => {
-                console.log(data)
                 this.master = data
             })
     }

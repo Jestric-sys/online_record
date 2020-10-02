@@ -7,6 +7,9 @@ import register from '../views/register.vue'
 import PageUsers from '../views/PageUsers.vue'
 import PageMasters from '../views/PageMasters.vue'
 
+//DELETE
+import test from '../views/testCategory.vue'
+
 Vue.use(VueRouter)
 
   const routes = [
@@ -39,6 +42,11 @@ Vue.use(VueRouter)
     path: "/page-masters",
     name: "page-masters",
     component: PageMasters,
+  },
+  {
+    path: '/test',
+    name: 'test',
+    component: test
   }
 ]
 

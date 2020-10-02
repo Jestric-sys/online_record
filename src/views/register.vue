@@ -46,7 +46,7 @@ export default {
         }
         axios
           .post('/api/register', data)
-          .then(() => this.$router.push('/login'))
+          .then(() => this.$router.push('/'))
           .catch(err => console.log(err))
       }
     }
